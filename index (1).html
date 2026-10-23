@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paciscor Slides</title>
+<style>
+:root{--bg:#eef3fc;--fg:#0d2a8c;--bar:#ffffff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#07123a;--fg:#cfe0ff;--bar:#0d1b4f}}
+:root[data-theme="dark"]{--bg:#07123a;--fg:#cfe0ff;--bar:#0d1b4f}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{display:flex;flex-direction:column}
+main{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:12px}
+.s{display:none;max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 6px 28px rgba(0,0,0,.25)}
+.s.on{display:block}
+nav{display:flex;align-items:center;justify-content:center;gap:16px;padding:10px;background:var(--bar)}
+button{font:inherit;border:0;border-radius:999px;padding:8px 18px;background:#0d2a8c;color:#fff;cursor:pointer}
+button:disabled{opacity:.4;cursor:default}
+span{min-width:60px;text-align:center}
+</style></head><body>
+<main><img class="s" alt="Slide 1" src="slide-01.jpg"><img class="s" alt="Slide 2" src="slide-02.jpg"><img class="s" alt="Slide 3" src="slide-03.jpg"><img class="s" alt="Slide 4" src="slide-04.jpg"><img class="s" alt="Slide 5" src="slide-05.jpg"><img class="s" alt="Slide 6" src="slide-06.jpg"><img class="s" alt="Slide 7" src="slide-07.jpg"><img class="s" alt="Slide 8" src="slide-08.jpg"><img class="s" alt="Slide 9" src="slide-09.jpg"><img class="s" alt="Slide 10" src="slide-10.jpg"><img class="s" alt="Slide 11" src="slide-11.jpg"><img class="s" alt="Slide 12" src="slide-12.jpg"><img class="s" alt="Slide 13" src="slide-13.jpg"><img class="s" alt="Slide 14" src="slide-14.jpg"><img class="s" alt="Slide 15" src="slide-15.jpg"><img class="s" alt="Slide 16" src="slide-16.jpg"><img class="s" alt="Slide 17" src="slide-17.jpg"><img class="s" alt="Slide 18" src="slide-18.jpg"><img class="s" alt="Slide 19" src="slide-19.jpg"><img class="s" alt="Slide 20" src="slide-20.jpg"></main>
+<nav><button id="p">&larr; Prev</button><span id="c"></span><button id="n">Next &rarr;</button></nav>
+<script>
+var s=document.querySelectorAll('.s'),i=0,c=document.getElementById('c'),p=document.getElementById('p'),n=document.getElementById('n');
+try{var h=parseInt(location.hash.slice(1));if(h>=1&&h<=s.length)i=h-1;}catch(e){}
+function show(){s.forEach(function(e,k){e.classList.toggle('on',k===i)});c.textContent=(i+1)+' / '+s.length;p.disabled=i===0;n.disabled=i===s.length-1;}
+p.onclick=function(){if(i>0){i--;show()}};n.onclick=function(){if(i<s.length-1){i++;show()}};
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')n.onclick();if(e.key==='ArrowLeft')p.onclick();});
+var x=null;document.addEventListener('touchstart',function(e){x=e.touches[0].clientX});
+document.addEventListener('touchend',function(e){if(x===null)return;var d=e.changedTouches[0].clientX-x;if(d<-40)n.onclick();if(d>40)p.onclick();x=null;});
+show();
+</script></body></html>
